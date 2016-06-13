@@ -1,0 +1,1 @@
+{"version":3,"file":"facebook.js","sourceRoot":"","sources":["facebook.ts"],"names":[],"mappings":"OACO,EAAC,MAAM,EAAE,mBAAmB,EAAC,MAAM,UAAU;AAEpD,8BAA8B,MAAM;IAEhC,YAAmB,aAAqB;QACpC,MAAM,UAAU,EAAE,UAAU,EAAE,aAAa,EAAE,IAAI,mBAAmB,CAAC;YACjE,uBAAuB,EAAE,uCAAuC;SACnE,CAAC,CAAC,CAAC;IACR,CAAC;AAEL,CAAC;AAAA"}

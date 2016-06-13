@@ -1,0 +1,14 @@
+import { FrameworkConfiguration } from "aurelia-framework";
+import { SecurityContext } from "./security-context";
+import { AuthorizeRequest } from "./authorize-request";
+import { AuthorizeStep } from "./authorize-step";
+import { Principal } from "./principal";
+import { SecurityRole } from "./security-role";
+import { Credential } from "./credential";
+import { ImplicitCredential } from "./implicit-credential";
+import { PasswordCredential } from "./password-credential";
+import { ProviderCredential } from "./provider-credential";
+import { TokenCredential } from "./token-credential";
+import { Tenant } from "./tenant";
+export declare function configure(frameworkConfiguration: FrameworkConfiguration, pluginConfiguration: Function): Promise<void>;
+export { SecurityContext, AuthorizeRequest, AuthorizeStep, Tenant, Principal, SecurityRole, Credential, ImplicitCredential, PasswordCredential, ProviderCredential, TokenCredential };
