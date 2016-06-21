@@ -1,4 +1,4 @@
-import {autoinject} from "aurelia-property-injection";
+import {autoinject} from "aurelia-dependency-injection";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {HttpClient, HttpResponseMessage} from "aurelia-http-client";
 import {buildQueryString} from "aurelia-path";
@@ -16,7 +16,7 @@ import {BasicAuthenticator} from "./basic-authenticator";
 import {BearerAuthenticator} from "./bearer-authenticator";
 import {Principal} from "./principal";
 import {SecurityRole} from "./security-role";
-import {HttpHeaders, MediaType} from "http-utils";
+import {HttpHeaders, MediaType} from "aurelia-http-utils";
 import {LocalStorage} from "aurelia-storage";
 import {Tenant} from "./tenant";
 

@@ -1,4 +1,4 @@
-import {autoinject} from "aurelia-property-injection";
+import {autoinject} from "aurelia-dependency-injection";
 import {Router, PipelineStep, NavigationInstruction, Redirect} from "aurelia-router";
 import {I18N} from "aurelia-i18n";
 import {SecurityContext} from "./security-context";

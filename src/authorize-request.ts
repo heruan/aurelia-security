@@ -1,6 +1,6 @@
-import {autoinject} from "aurelia-property-injection";
+import {autoinject} from "aurelia-dependency-injection";
 import {Interceptor, HttpRequestMessage, HttpResponseMessage} from "aurelia-http-client";
-import {HttpHeaders} from "http-utils";
+import {HttpHeaders} from "aurelia-http-utils";
 import {SecurityContext} from "./security-context";
 
 @autoinject

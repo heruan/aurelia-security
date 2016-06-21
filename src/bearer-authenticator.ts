@@ -1,5 +1,5 @@
 import {HttpRequestMessage} from "aurelia-http-client";
-import {HttpHeaders} from "http-utils";
+import {HttpHeaders} from "aurelia-http-utils";
 import {Authenticator} from "./authenticator";
 import {TokenCredential} from "./token-credential";
 

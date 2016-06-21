@@ -1,0 +1,1 @@
+{"version":3,"file":"github.js","sourceRoot":"","sources":["../../src/providers/github.ts"],"names":[],"mappings":";;;;;;AACA,uBAA0C,UAAU,CAAC,CAAA;AAErD;IAA4B,0BAAM;IAE9B,gBAAmB,aAAqB;QACpC,kBAAM,QAAQ,EAAE,QAAQ,EAAE,aAAa,EAAE,IAAI,4BAAmB,CAAC;YAC7D,uBAAuB,EAAE,0CAA0C;SACtE,CAAC,CAAC,CAAC;IACR,CAAC;IAEL,aAAC;AAAD,CAAC,AARD,CAA4B,eAAM,GAQjC;AARY,cAAM,SAQlB,CAAA"}
