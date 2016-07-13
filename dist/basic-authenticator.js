@@ -18,4 +18,3 @@ var BasicAuthenticator = (function () {
     return BasicAuthenticator;
 }());
 exports.BasicAuthenticator = BasicAuthenticator;
-//# sourceMappingURL=basic-authenticator.js.map

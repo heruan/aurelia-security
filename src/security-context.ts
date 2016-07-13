@@ -1,9 +1,8 @@
-import {autoinject} from "aurelia-dependency-injection";
+import {inject, Optional} from "aurelia-dependency-injection";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {HttpClient, HttpResponseMessage} from "aurelia-http-client";
 import {buildQueryString} from "aurelia-path";
 import {Router, NavModel} from "aurelia-router";
-import {I18N} from "aurelia-i18n";
 import {AuthorizeRequest} from "./authorize-request";
 import {Credential} from "./credential";
 import {ImplicitCredential} from "./implicit-credential";
@@ -20,7 +19,7 @@ import {HttpHeaders, MediaType} from "aurelia-http-utils";
 import {LocalStorage} from "aurelia-storage";
 import {Tenant} from "./tenant";
 
-@autoinject
+@inject(EventAggregator, HttpClient, Router, LocalStorage)
 export class SecurityContext {
 
     public static AUTHENTICATED_EVENT: string = "aurelia.security.authenticated";
@@ -37,8 +36,6 @@ export class SecurityContext {
 
     private router: Router;
 
-    private i18n: I18N;
-
     private authenticator: Authenticator;
 
     private userPrincipal: Principal;
@@ -47,10 +44,9 @@ export class SecurityContext {
 
     private currentTenant: Tenant;
 
-    public constructor(eventAggregator: EventAggregator, api: HttpClient, router: Router, i18n: I18N, storage: LocalStorage) {
+    public constructor(eventAggregator: EventAggregator, api: HttpClient, router: Router, storage: LocalStorage) {
         this.eventAggregator = eventAggregator;
         this.router = router;
-        this.i18n = i18n;
         this.storage = storage;
         this.configuration = new SecurityContextConfiguration();
         this.api = api;
@@ -106,9 +102,10 @@ export class SecurityContext {
         this.refreshRouteVisibility(this.router);
         if (navigateToSignOutRoute) {
             this.router.navigateToRoute(this.configuration.signOutRoute, {
-                message: this.i18n.tr("aurelia:security.signout", {
-                    defaultValue: "You have successfully logged out."
-                }),
+                // message: this.i18n.tr("aurelia:security.signout", {
+                //     defaultValue: "You have successfully logged out."
+                // }),
+                message: "You have successfully logged out.",
                 path: this.router.currentInstruction.fragment
             });
         }

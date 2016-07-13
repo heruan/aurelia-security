@@ -9,4 +9,3 @@ var TokenCredential = (function () {
     return TokenCredential;
 }());
 exports.TokenCredential = TokenCredential;
-//# sourceMappingURL=token-credential.js.map

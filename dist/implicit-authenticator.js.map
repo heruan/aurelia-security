@@ -1,1 +1,0 @@
-{"version":3,"file":"implicit-authenticator.js","sourceRoot":"","sources":["../src/implicit-authenticator.ts"],"names":[],"mappings":";AAIA;IAAA;IAaA,CAAC;IARU,gDAAgB,GAAvB,UAAwB,OAA2B;QAC/C,MAAM,CAAC,OAAO,CAAC;IACnB,CAAC;IAEM,yCAAS,GAAhB;QACI,MAAM,CAAC,qBAAqB,CAAC,MAAM,CAAC;IACxC,CAAC;IATc,4BAAM,GAAW,UAAU,CAAC;IAW/C,4BAAC;AAAD,CAAC,AAbD,IAaC;AAbY,6BAAqB,wBAajC,CAAA"}

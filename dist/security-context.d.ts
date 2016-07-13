@@ -1,7 +1,6 @@
 import { EventAggregator } from "aurelia-event-aggregator";
 import { HttpClient, HttpResponseMessage } from "aurelia-http-client";
 import { Router } from "aurelia-router";
-import { I18N } from "aurelia-i18n";
 import { Credential } from "./credential";
 import { Authenticator } from "./authenticator";
 import { Principal } from "./principal";
@@ -15,12 +14,11 @@ export declare class SecurityContext {
     eventAggregator: EventAggregator;
     private api;
     private router;
-    private i18n;
     private authenticator;
     private userPrincipal;
     private storage;
     private currentTenant;
-    constructor(eventAggregator: EventAggregator, api: HttpClient, router: Router, i18n: I18N, storage: LocalStorage);
+    constructor(eventAggregator: EventAggregator, api: HttpClient, router: Router, storage: LocalStorage);
     configure(configuration: Object): void;
     refreshRouteVisibility(router: Router): void;
     authenticate(credential: Credential, remember?: boolean): Promise<Principal>;

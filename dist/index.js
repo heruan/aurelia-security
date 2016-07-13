@@ -2,7 +2,6 @@
 var aurelia_event_aggregator_1 = require("aurelia-event-aggregator");
 var aurelia_router_1 = require("aurelia-router");
 var aurelia_http_client_1 = require("aurelia-http-client");
-var aurelia_i18n_1 = require("aurelia-i18n");
 var security_context_1 = require("./security-context");
 exports.SecurityContext = security_context_1.SecurityContext;
 var authorize_request_1 = require("./authorize-request");
@@ -23,9 +22,8 @@ function configure(frameworkConfiguration, pluginConfiguration) {
     var eventAggregator = container.get(aurelia_event_aggregator_1.EventAggregator);
     var router = container.get(aurelia_router_1.Router);
     var httpClient = container.get(aurelia_http_client_1.HttpClient);
-    var i18n = container.get(aurelia_i18n_1.I18N);
     var storage = container.get(aurelia_storage_1.LocalStorage);
-    var securityContext = new security_context_1.SecurityContext(eventAggregator, httpClient, router, i18n, storage);
+    var securityContext = new security_context_1.SecurityContext(eventAggregator, httpClient, router, storage);
     container.registerInstance(security_context_1.SecurityContext, securityContext);
     if (pluginConfiguration) {
         pluginConfiguration(securityContext);
@@ -37,4 +35,3 @@ function configure(frameworkConfiguration, pluginConfiguration) {
     }).then(null, function (failure) { return console.debug(failure); });
 }
 exports.configure = configure;
-//# sourceMappingURL=index.js.map

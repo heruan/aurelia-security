@@ -13,7 +13,6 @@ var aurelia_event_aggregator_1 = require("aurelia-event-aggregator");
 var aurelia_http_client_1 = require("aurelia-http-client");
 var aurelia_path_1 = require("aurelia-path");
 var aurelia_router_1 = require("aurelia-router");
-var aurelia_i18n_1 = require("aurelia-i18n");
 var authorize_request_1 = require("./authorize-request");
 var implicit_credential_1 = require("./implicit-credential");
 var password_credential_1 = require("./password-credential");
@@ -25,11 +24,10 @@ var bearer_authenticator_1 = require("./bearer-authenticator");
 var aurelia_http_utils_1 = require("aurelia-http-utils");
 var aurelia_storage_1 = require("aurelia-storage");
 var SecurityContext = (function () {
-    function SecurityContext(eventAggregator, api, router, i18n, storage) {
+    function SecurityContext(eventAggregator, api, router, storage) {
         var _this = this;
         this.eventAggregator = eventAggregator;
         this.router = router;
-        this.i18n = i18n;
         this.storage = storage;
         this.configuration = new SecurityContextConfiguration();
         this.api = api;
@@ -87,9 +85,10 @@ var SecurityContext = (function () {
         this.refreshRouteVisibility(this.router);
         if (navigateToSignOutRoute) {
             this.router.navigateToRoute(this.configuration.signOutRoute, {
-                message: this.i18n.tr("aurelia:security.signout", {
-                    defaultValue: "You have successfully logged out."
-                }),
+                // message: this.i18n.tr("aurelia:security.signout", {
+                //     defaultValue: "You have successfully logged out."
+                // }),
+                message: "You have successfully logged out.",
                 path: this.router.currentInstruction.fragment
             });
         }
@@ -181,8 +180,8 @@ var SecurityContext = (function () {
     SecurityContext.UNAUTHENTICATED_EVENT = "aurelia.security.unauthenticated";
     SecurityContext.TENANT_ID_HEADER = "X-Tenant-ID";
     SecurityContext = __decorate([
-        aurelia_dependency_injection_1.autoinject, 
-        __metadata('design:paramtypes', [aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_i18n_1.I18N, aurelia_storage_1.LocalStorage])
+        aurelia_dependency_injection_1.inject(aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_storage_1.LocalStorage), 
+        __metadata('design:paramtypes', [aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_storage_1.LocalStorage])
     ], SecurityContext);
     return SecurityContext;
 }());
@@ -203,4 +202,3 @@ var SecurityContextConfiguration = (function () {
     return SecurityContextConfiguration;
 }());
 exports.SecurityContextConfiguration = SecurityContextConfiguration;
-//# sourceMappingURL=security-context.js.map

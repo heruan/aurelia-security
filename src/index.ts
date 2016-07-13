@@ -3,7 +3,6 @@ import {Container} from "aurelia-dependency-injection";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {Router} from "aurelia-router";
 import {HttpClient} from "aurelia-http-client";
-import {I18N} from "aurelia-i18n";
 import {SecurityContext} from "./security-context";
 import {AuthorizeRequest} from "./authorize-request";
 import {AuthorizeStep} from "./authorize-step";
@@ -22,9 +21,8 @@ export function configure(frameworkConfiguration: FrameworkConfiguration, plugin
     let eventAggregator: EventAggregator = container.get(EventAggregator);
     let router: Router = container.get(Router);
     let httpClient: HttpClient = container.get(HttpClient);
-    let i18n: I18N = container.get(I18N);
     let storage: LocalStorage = container.get(LocalStorage);
-    let securityContext: SecurityContext = new SecurityContext(eventAggregator, httpClient, router, i18n, storage);
+    let securityContext: SecurityContext = new SecurityContext(eventAggregator, httpClient, router, storage);
     container.registerInstance(SecurityContext, securityContext);
     if (pluginConfiguration) {
         pluginConfiguration(securityContext);

@@ -15,4 +15,3 @@ var BearerAuthenticator = (function () {
     return BearerAuthenticator;
 }());
 exports.BearerAuthenticator = BearerAuthenticator;
-//# sourceMappingURL=bearer-authenticator.js.map

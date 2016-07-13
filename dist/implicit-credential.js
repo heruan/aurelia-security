@@ -5,4 +5,3 @@ var ImplicitCredential = (function () {
     return ImplicitCredential;
 }());
 exports.ImplicitCredential = ImplicitCredential;
-//# sourceMappingURL=implicit-credential.js.map

@@ -10,13 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var aurelia_router_1 = require("aurelia-router");
-var aurelia_i18n_1 = require("aurelia-i18n");
 var security_context_1 = require("./security-context");
 var AuthorizeStep = (function () {
-    function AuthorizeStep(securityContext, router, i18n) {
+    function AuthorizeStep(securityContext, router) {
         this.securityContext = securityContext;
         this.router = router;
-        this.i18n = i18n;
     }
     AuthorizeStep.prototype.run = function (currentInstruction, next) {
         var _this = this;
@@ -25,17 +23,19 @@ var AuthorizeStep = (function () {
             if (instruction.config.settings.requireAuthentication || instruction.config.settings.hasOwnProperty("roles")) {
                 if (this.securityContext.getUserPrincipal() == null) {
                     throw new aurelia_router_1.Redirect(this.router.generate(this.securityContext.configuration.signInRoute, {
-                        message: this.i18n.tr("security:unauthorized", {
-                            defaultValue: "You are not authenticated, please sign-in."
-                        }),
+                        // message: this.i18n.tr("security:unauthorized", {
+                        //     defaultValue: "You are not authenticated, please sign-in."
+                        // }),
+                        messagge: "You are not authenticated, please sign-in.",
                         path: currentInstruction.fragment
                     }));
                 }
                 else if (Array.isArray(instruction.config.settings.roles) && !instruction.config.settings.roles.some(function (role) { return _this.securityContext.isUserInRole(role); })) {
                     throw new aurelia_router_1.Redirect(this.router.generate(this.securityContext.configuration.forbiddenRoute, {
-                        message: this.i18n.tr("security:forbidden", {
-                            defaultValue: "You are not authorized to access this resource."
-                        }),
+                        // message: this.i18n.tr("security:forbidden", {
+                        //     defaultValue: "You are not authorized to access this resource."
+                        // }),
+                        message: "You are not authorized to access this resource",
                         path: currentInstruction.fragment
                     }));
                 }
@@ -45,9 +45,8 @@ var AuthorizeStep = (function () {
     };
     AuthorizeStep = __decorate([
         aurelia_dependency_injection_1.autoinject, 
-        __metadata('design:paramtypes', [security_context_1.SecurityContext, aurelia_router_1.Router, aurelia_i18n_1.I18N])
+        __metadata('design:paramtypes', [security_context_1.SecurityContext, aurelia_router_1.Router])
     ], AuthorizeStep);
     return AuthorizeStep;
 }());
 exports.AuthorizeStep = AuthorizeStep;
-//# sourceMappingURL=authorize-step.js.map

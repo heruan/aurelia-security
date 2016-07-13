@@ -13,4 +13,3 @@ var ProviderCredential = (function () {
     return ProviderCredential;
 }());
 exports.ProviderCredential = ProviderCredential;
-//# sourceMappingURL=provider-credential.js.map

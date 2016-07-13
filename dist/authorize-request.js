@@ -67,4 +67,3 @@ var AuthorizeRequest = (function () {
     return AuthorizeRequest;
 }());
 exports.AuthorizeRequest = AuthorizeRequest;
-//# sourceMappingURL=authorize-request.js.map

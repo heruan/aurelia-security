@@ -36,4 +36,3 @@ var OAuth2Configuration = (function () {
     return OAuth2Configuration;
 }());
 exports.OAuth2Configuration = OAuth2Configuration;
-//# sourceMappingURL=oauth2.js.map

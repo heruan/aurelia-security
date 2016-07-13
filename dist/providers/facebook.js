@@ -15,4 +15,3 @@ var Facebook = (function (_super) {
     return Facebook;
 }(oauth2_1.OAuth2));
 exports.Facebook = Facebook;
-//# sourceMappingURL=facebook.js.map
