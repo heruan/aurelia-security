@@ -15,6 +15,7 @@ import {ProviderCredential} from "./provider-credential";
 import {TokenCredential} from "./token-credential";
 import {LocalStorage} from "aurelia-storage";
 import {Tenant} from "./tenant";
+import {Preferences} from "./preferences";
 
 export function configure(frameworkConfiguration: FrameworkConfiguration, pluginConfiguration: Function) {
     let container: Container = frameworkConfiguration.container;
@@ -28,7 +29,7 @@ export function configure(frameworkConfiguration: FrameworkConfiguration, plugin
         pluginConfiguration(securityContext);
     }
     return securityContext.authenticate(new ImplicitCredential()).then(null, failure => {
-        return storage.get(securityContext.configuration.authorizationTokenStorageKey).then(token => {
+        return storage.get<string>(securityContext.configuration.authorizationTokenStorageKey).then(token => {
             return securityContext.authenticate(new TokenCredential(token));
         }).then(null, tokenNotValid => securityContext.deleteAndRevokeToken());
     }).then(null, failure => console.debug(failure));
@@ -45,5 +46,6 @@ export {
     ImplicitCredential,
     PasswordCredential,
     ProviderCredential,
-    TokenCredential
+    TokenCredential,
+    Preferences
 };

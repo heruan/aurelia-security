@@ -17,6 +17,8 @@ exports.ProviderCredential = provider_credential_1.ProviderCredential;
 var token_credential_1 = require("./token-credential");
 exports.TokenCredential = token_credential_1.TokenCredential;
 var aurelia_storage_1 = require("aurelia-storage");
+var preferences_1 = require("./preferences");
+exports.Preferences = preferences_1.Preferences;
 function configure(frameworkConfiguration, pluginConfiguration) {
     var container = frameworkConfiguration.container;
     var eventAggregator = container.get(aurelia_event_aggregator_1.EventAggregator);

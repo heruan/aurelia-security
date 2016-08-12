@@ -22,7 +22,7 @@ export class AuthorizeStep implements PipelineStep {
                         // message: this.i18n.tr("security:unauthorized", {
                         //     defaultValue: "You are not authenticated, please sign-in."
                         // }),
-                        messagge: "You are not authenticated, please sign-in.",
+                        message: "You are not authenticated, please sign-in.",
                         path: currentInstruction.fragment
                     }));
                 } else if (Array.isArray(instruction.config.settings.roles) && !instruction.config.settings.roles.some((role: string) => this.securityContext.isUserInRole(role))) {

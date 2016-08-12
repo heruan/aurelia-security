@@ -26,7 +26,7 @@ var AuthorizeStep = (function () {
                         // message: this.i18n.tr("security:unauthorized", {
                         //     defaultValue: "You are not authenticated, please sign-in."
                         // }),
-                        messagge: "You are not authenticated, please sign-in.",
+                        message: "You are not authenticated, please sign-in.",
                         path: currentInstruction.fragment
                     }));
                 }
