@@ -1,6 +1,6 @@
-import {autoinject} from "aurelia-dependency-injection";
-import {Router, PipelineStep, NavigationInstruction, Redirect} from "aurelia-router";
-import {SecurityContext} from "./security-context";
+import { autoinject} from "aurelia-dependency-injection";
+import { Router, PipelineStep, NavigationInstruction, Redirect} from "aurelia-router";
+import { SecurityContext} from "./security-context";
 
 @autoinject
 export class AuthorizeStep implements PipelineStep {

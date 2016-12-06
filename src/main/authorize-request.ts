@@ -1,7 +1,7 @@
-import {autoinject} from "aurelia-dependency-injection";
-import {Interceptor, HttpRequestMessage, HttpResponseMessage} from "aurelia-http-client";
-import {HttpHeaders} from "aurelia-http-utils";
-import {SecurityContext} from "./security-context";
+import { autoinject} from "aurelia-dependency-injection";
+import { Interceptor, HttpRequestMessage, HttpResponseMessage} from "aurelia-http-client";
+import { HttpHeaders} from "aurelia-http-utils";
+import { SecurityContext} from "./security-context";
 
 @autoinject
 export class AuthorizeRequest implements Interceptor {

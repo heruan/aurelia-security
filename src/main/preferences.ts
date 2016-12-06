@@ -1,4 +1,4 @@
-import {StorageEngine} from "aurelia-storage";
+import { StorageEngine} from "aurelia-storage";
 
 export class Preferences implements StorageEngine {
 

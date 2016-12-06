@@ -1,5 +1,5 @@
-import {Provider} from "../provider";
-import {Principal} from "../principal";
+import { Provider} from "../provider";
+import { Principal} from "../principal";
 
 export class OAuth2 implements Provider {
 

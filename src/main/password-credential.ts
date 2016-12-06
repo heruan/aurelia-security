@@ -1,4 +1,4 @@
-import {Credential} from "./credential";
+import { Credential} from "./credential";
 
 export class PasswordCredential implements Credential {
 

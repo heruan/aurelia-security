@@ -1,7 +1,7 @@
-import {HttpRequestMessage} from "aurelia-http-client";
-import {HttpHeaders} from "aurelia-http-utils";
-import {Authenticator} from "./authenticator";
-import {TokenCredential} from "./token-credential";
+import { HttpRequestMessage} from "aurelia-http-client";
+import { HttpHeaders} from "aurelia-http-utils";
+import { Authenticator} from "./authenticator";
+import { TokenCredential} from "./token-credential";
 
 export class BearerAuthenticator implements Authenticator {
 

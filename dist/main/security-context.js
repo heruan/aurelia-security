@@ -176,15 +176,15 @@ var SecurityContext = (function () {
     SecurityContext.prototype.switchTenant = function (tenant) {
         this.currentTenant = tenant;
     };
-    SecurityContext.AUTHENTICATED_EVENT = "aurelia.security.authenticated";
-    SecurityContext.UNAUTHENTICATED_EVENT = "aurelia.security.unauthenticated";
-    SecurityContext.TENANT_ID_HEADER = "X-Tenant-ID";
-    SecurityContext = __decorate([
-        aurelia_dependency_injection_1.inject(aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_storage_1.LocalStorage), 
-        __metadata('design:paramtypes', [aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_storage_1.LocalStorage])
-    ], SecurityContext);
     return SecurityContext;
 }());
+SecurityContext.AUTHENTICATED_EVENT = "aurelia.security.authenticated";
+SecurityContext.UNAUTHENTICATED_EVENT = "aurelia.security.unauthenticated";
+SecurityContext.TENANT_ID_HEADER = "X-Tenant-ID";
+SecurityContext = __decorate([
+    aurelia_dependency_injection_1.inject(aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_storage_1.LocalStorage),
+    __metadata("design:paramtypes", [aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_storage_1.LocalStorage])
+], SecurityContext);
 exports.SecurityContext = SecurityContext;
 var SecurityContextConfiguration = (function () {
     function SecurityContextConfiguration() {

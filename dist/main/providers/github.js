@@ -8,9 +8,9 @@ var oauth2_1 = require("./oauth2");
 var GitHub = (function (_super) {
     __extends(GitHub, _super);
     function GitHub(applicationId) {
-        _super.call(this, "github", "GitHub", applicationId, new oauth2_1.OAuth2Configuration({
+        return _super.call(this, "github", "GitHub", applicationId, new oauth2_1.OAuth2Configuration({
             authorizationRequestUrl: "https://github.com/login/oauth/authorize"
-        }));
+        })) || this;
     }
     return GitHub;
 }(oauth2_1.OAuth2));

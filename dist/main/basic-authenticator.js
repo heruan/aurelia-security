@@ -13,8 +13,8 @@ var BasicAuthenticator = (function () {
     BasicAuthenticator.prototype.getScheme = function () {
         return BasicAuthenticator.SCHEME;
     };
-    BasicAuthenticator.SCHEME = "Basic";
-    BasicAuthenticator.DELIMITER = ":";
     return BasicAuthenticator;
 }());
 exports.BasicAuthenticator = BasicAuthenticator;
+BasicAuthenticator.SCHEME = "Basic";
+BasicAuthenticator.DELIMITER = ":";

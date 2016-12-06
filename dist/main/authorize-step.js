@@ -43,10 +43,10 @@ var AuthorizeStep = (function () {
         }
         return next();
     };
-    AuthorizeStep = __decorate([
-        aurelia_dependency_injection_1.autoinject, 
-        __metadata('design:paramtypes', [security_context_1.SecurityContext, aurelia_router_1.Router])
-    ], AuthorizeStep);
     return AuthorizeStep;
 }());
+AuthorizeStep = __decorate([
+    aurelia_dependency_injection_1.autoinject,
+    __metadata("design:paramtypes", [security_context_1.SecurityContext, aurelia_router_1.Router])
+], AuthorizeStep);
 exports.AuthorizeStep = AuthorizeStep;

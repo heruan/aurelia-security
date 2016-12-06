@@ -11,7 +11,7 @@ var BearerAuthenticator = (function () {
     BearerAuthenticator.prototype.getScheme = function () {
         return BearerAuthenticator.SCHEME;
     };
-    BearerAuthenticator.SCHEME = "Bearer";
     return BearerAuthenticator;
 }());
 exports.BearerAuthenticator = BearerAuthenticator;
+BearerAuthenticator.SCHEME = "Bearer";

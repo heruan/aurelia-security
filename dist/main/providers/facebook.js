@@ -8,9 +8,9 @@ var oauth2_1 = require("./oauth2");
 var Facebook = (function (_super) {
     __extends(Facebook, _super);
     function Facebook(applicationId) {
-        _super.call(this, "facebook", "Facebook", applicationId, new oauth2_1.OAuth2Configuration({
+        return _super.call(this, "facebook", "Facebook", applicationId, new oauth2_1.OAuth2Configuration({
             authorizationRequestUrl: "https://www.facebook.com/dialog/oauth"
-        }));
+        })) || this;
     }
     return Facebook;
 }(oauth2_1.OAuth2));

@@ -60,10 +60,10 @@ var AuthorizeRequest = (function () {
         }
         throw message;
     };
-    AuthorizeRequest = __decorate([
-        aurelia_dependency_injection_1.autoinject, 
-        __metadata('design:paramtypes', [security_context_1.SecurityContext])
-    ], AuthorizeRequest);
     return AuthorizeRequest;
 }());
+AuthorizeRequest = __decorate([
+    aurelia_dependency_injection_1.autoinject,
+    __metadata("design:paramtypes", [security_context_1.SecurityContext])
+], AuthorizeRequest);
 exports.AuthorizeRequest = AuthorizeRequest;
