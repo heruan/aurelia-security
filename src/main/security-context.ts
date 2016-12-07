@@ -1,23 +1,23 @@
-import { inject, Optional} from "aurelia-dependency-injection";
-import { EventAggregator} from "aurelia-event-aggregator";
-import { HttpClient, HttpResponseMessage} from "aurelia-http-client";
-import { buildQueryString} from "aurelia-path";
-import { Router, NavModel} from "aurelia-router";
-import { AuthorizeRequest} from "./authorize-request";
-import { Credential} from "./credential";
-import { ImplicitCredential} from "./implicit-credential";
-import { PasswordCredential} from "./password-credential";
-import { ProviderCredential} from "./provider-credential";
-import { TokenCredential} from "./token-credential";
-import { Authenticator} from "./authenticator";
-import { ImplicitAuthenticator} from "./implicit-authenticator";
-import { BasicAuthenticator} from "./basic-authenticator";
-import { BearerAuthenticator} from "./bearer-authenticator";
-import { Principal} from "./principal";
-import { SecurityRole} from "./security-role";
-import { HttpHeaders, MediaType} from "aurelia-http-utils";
-import { LocalStorage} from "aurelia-storage";
-import { Tenant} from "./tenant";
+import { inject, Optional } from "aurelia-dependency-injection";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { HttpClient, HttpResponseMessage } from "aurelia-http-client";
+import { buildQueryString } from "aurelia-path";
+import { Router, NavModel } from "aurelia-router";
+import { AuthorizeRequest } from "./authorize-request";
+import { Credential } from "./credential";
+import { ImplicitCredential } from "./implicit-credential";
+import { PasswordCredential } from "./password-credential";
+import { ProviderCredential } from "./provider-credential";
+import { TokenCredential } from "./token-credential";
+import { Authenticator } from "./authenticator";
+import { ImplicitAuthenticator } from "./implicit-authenticator";
+import { BasicAuthenticator } from "./basic-authenticator";
+import { BearerAuthenticator } from "./bearer-authenticator";
+import { Principal } from "./principal";
+import { SecurityRole } from "./security-role";
+import { HttpHeaders, MediaType } from "aurelia-http-utils";
+import { LocalStorage } from "aurelia-storage";
+import { Tenant } from "./tenant";
 
 @inject(EventAggregator, HttpClient, Router, LocalStorage)
 export class SecurityContext {

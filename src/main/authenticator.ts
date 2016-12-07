@@ -1,4 +1,4 @@
-import { HttpRequestMessage} from "aurelia-http-client";
+import { HttpRequestMessage } from "aurelia-http-client";
 
 export interface Authenticator {
 

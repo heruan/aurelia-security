@@ -1,5 +1,5 @@
-import { Provider} from "../provider";
-import { OAuth2, OAuth2Configuration} from "./oauth2";
+import { Provider } from "../provider";
+import { OAuth2, OAuth2Configuration } from "./oauth2";
 
 export class Facebook extends OAuth2 implements Provider {
 

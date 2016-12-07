@@ -1,4 +1,4 @@
-import { SecurityRole} from "./security-role";
+import { SecurityRole } from "./security-role";
 
 export interface Principal {
 

@@ -1,7 +1,7 @@
-import { HttpRequestMessage} from "aurelia-http-client";
-import { HttpHeaders} from "aurelia-http-utils";
-import { Authenticator} from "./authenticator";
-import { PasswordCredential} from "./password-credential";
+import { HttpRequestMessage } from "aurelia-http-client";
+import { HttpHeaders } from "aurelia-http-utils";
+import { Authenticator } from "./authenticator";
+import { PasswordCredential } from "./password-credential";
 
 export class BasicAuthenticator implements Authenticator {
 

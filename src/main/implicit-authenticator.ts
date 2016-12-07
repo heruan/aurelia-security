@@ -1,6 +1,6 @@
-import { HttpRequestMessage} from "aurelia-http-client";
-import { Authenticator} from "./authenticator";
-import { ImplicitCredential} from "./implicit-credential";
+import { HttpRequestMessage } from "aurelia-http-client";
+import { Authenticator } from "./authenticator";
+import { ImplicitCredential } from "./implicit-credential";
 
 export class ImplicitAuthenticator implements Authenticator {
 
