@@ -50,3 +50,5 @@ AuthorizeStep = __decorate([
     __metadata("design:paramtypes", [security_context_1.SecurityContext, aurelia_router_1.Router])
 ], AuthorizeStep);
 exports.AuthorizeStep = AuthorizeStep;
+
+//# sourceMappingURL=authorize-step.js.map

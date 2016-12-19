@@ -13,3 +13,5 @@ var PasswordCredential = (function () {
     return PasswordCredential;
 }());
 exports.PasswordCredential = PasswordCredential;
+
+//# sourceMappingURL=password-credential.js.map

@@ -67,3 +67,5 @@ AuthorizeRequest = __decorate([
     __metadata("design:paramtypes", [security_context_1.SecurityContext])
 ], AuthorizeRequest);
 exports.AuthorizeRequest = AuthorizeRequest;
+
+//# sourceMappingURL=authorize-request.js.map

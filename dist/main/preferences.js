@@ -14,3 +14,5 @@ var Preferences = (function () {
     return Preferences;
 }());
 exports.Preferences = Preferences;
+
+//# sourceMappingURL=preferences.js.map

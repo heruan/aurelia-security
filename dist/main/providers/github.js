@@ -15,3 +15,5 @@ var GitHub = (function (_super) {
     return GitHub;
 }(oauth2_1.OAuth2));
 exports.GitHub = GitHub;
+
+//# sourceMappingURL=github.js.map

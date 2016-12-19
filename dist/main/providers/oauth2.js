@@ -9,7 +9,7 @@ var OAuth2 = (function () {
     OAuth2.prototype.requestAuthorization = function () {
         var scope = [];
         for (var _i = 0; _i < arguments.length; _i++) {
-            scope[_i - 0] = arguments[_i];
+            scope[_i] = arguments[_i];
         }
         var redirectUri = window.location.origin + window.location.pathname + ("?provider=" + this.name);
         var url = this.configuration.authorizationRequestUrl + "?"
@@ -36,3 +36,5 @@ var OAuth2Configuration = (function () {
     return OAuth2Configuration;
 }());
 exports.OAuth2Configuration = OAuth2Configuration;
+
+//# sourceMappingURL=oauth2.js.map

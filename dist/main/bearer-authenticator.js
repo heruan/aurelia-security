@@ -13,5 +13,7 @@ var BearerAuthenticator = (function () {
     };
     return BearerAuthenticator;
 }());
-exports.BearerAuthenticator = BearerAuthenticator;
 BearerAuthenticator.SCHEME = "Bearer";
+exports.BearerAuthenticator = BearerAuthenticator;
+
+//# sourceMappingURL=bearer-authenticator.js.map

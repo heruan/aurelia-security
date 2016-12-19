@@ -37,3 +37,5 @@ function configure(frameworkConfiguration, pluginConfiguration) {
     }).then(null, function (failure) { return console.debug(failure); });
 }
 exports.configure = configure;
+
+//# sourceMappingURL=index.js.map

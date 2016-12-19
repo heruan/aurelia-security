@@ -15,6 +15,8 @@ var BasicAuthenticator = (function () {
     };
     return BasicAuthenticator;
 }());
-exports.BasicAuthenticator = BasicAuthenticator;
 BasicAuthenticator.SCHEME = "Basic";
 BasicAuthenticator.DELIMITER = ":";
+exports.BasicAuthenticator = BasicAuthenticator;
+
+//# sourceMappingURL=basic-authenticator.js.map

@@ -10,5 +10,7 @@ var ImplicitAuthenticator = (function () {
     };
     return ImplicitAuthenticator;
 }());
-exports.ImplicitAuthenticator = ImplicitAuthenticator;
 ImplicitAuthenticator.SCHEME = "Implicit";
+exports.ImplicitAuthenticator = ImplicitAuthenticator;
+
+//# sourceMappingURL=implicit-authenticator.js.map

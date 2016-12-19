@@ -23,7 +23,7 @@ var basic_authenticator_1 = require("./basic-authenticator");
 var bearer_authenticator_1 = require("./bearer-authenticator");
 var aurelia_http_utils_1 = require("aurelia-http-utils");
 var aurelia_storage_1 = require("aurelia-storage");
-var SecurityContext = (function () {
+var SecurityContext = SecurityContext_1 = (function () {
     function SecurityContext(eventAggregator, api, router, storage) {
         var _this = this;
         this.eventAggregator = eventAggregator;
@@ -69,7 +69,7 @@ var SecurityContext = (function () {
                     .then(function (accessToken) { return _this.storage.set(_this.configuration.authorizationTokenStorageKey, accessToken); });
             }
             _this.userPrincipal = success.content;
-            _this.eventAggregator.publish(SecurityContext.AUTHENTICATED_EVENT, _this);
+            _this.eventAggregator.publish(SecurityContext_1.AUTHENTICATED_EVENT, _this);
             _this.refreshRouteVisibility(_this.router);
             return _this.userPrincipal;
         }, function (failure) {
@@ -79,7 +79,7 @@ var SecurityContext = (function () {
     };
     SecurityContext.prototype.deauthenticate = function (navigateToSignOutRoute) {
         if (navigateToSignOutRoute === void 0) { navigateToSignOutRoute = true; }
-        this.eventAggregator.publish(SecurityContext.UNAUTHENTICATED_EVENT, this);
+        this.eventAggregator.publish(SecurityContext_1.UNAUTHENTICATED_EVENT, this);
         this.userPrincipal = null;
         this.deleteAndRevokeToken();
         this.refreshRouteVisibility(this.router);
@@ -96,7 +96,7 @@ var SecurityContext = (function () {
     SecurityContext.prototype.requestAccessToken = function () {
         var scopes = [];
         for (var _i = 0; _i < arguments.length; _i++) {
-            scopes[_i - 0] = arguments[_i];
+            scopes[_i] = arguments[_i];
         }
         return this.api.createRequest(this.configuration.accessRequestUrl).asGet()
             .withParams({
@@ -155,7 +155,7 @@ var SecurityContext = (function () {
     SecurityContext.prototype.isUserInRole = function () {
         var roleNames = [];
         for (var _i = 0; _i < arguments.length; _i++) {
-            roleNames[_i - 0] = arguments[_i];
+            roleNames[_i] = arguments[_i];
         }
         if (this.userPrincipal) {
             return this.userPrincipal.roles.some(function (role) { return roleNames.indexOf(role.name) >= 0; });
@@ -181,7 +181,7 @@ var SecurityContext = (function () {
 SecurityContext.AUTHENTICATED_EVENT = "aurelia.security.authenticated";
 SecurityContext.UNAUTHENTICATED_EVENT = "aurelia.security.unauthenticated";
 SecurityContext.TENANT_ID_HEADER = "X-Tenant-ID";
-SecurityContext = __decorate([
+SecurityContext = SecurityContext_1 = __decorate([
     aurelia_dependency_injection_1.inject(aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_storage_1.LocalStorage),
     __metadata("design:paramtypes", [aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_storage_1.LocalStorage])
 ], SecurityContext);
@@ -202,3 +202,6 @@ var SecurityContextConfiguration = (function () {
     return SecurityContextConfiguration;
 }());
 exports.SecurityContextConfiguration = SecurityContextConfiguration;
+var SecurityContext_1;
+
+//# sourceMappingURL=security-context.js.map
