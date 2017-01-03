@@ -1,7 +1,4 @@
 "use strict";
-var aurelia_event_aggregator_1 = require("aurelia-event-aggregator");
-var aurelia_router_1 = require("aurelia-router");
-var aurelia_http_client_1 = require("aurelia-http-client");
 var security_context_1 = require("./security-context");
 exports.SecurityContext = security_context_1.SecurityContext;
 var authorize_request_1 = require("./authorize-request");
@@ -21,12 +18,8 @@ var preferences_1 = require("./preferences");
 exports.Preferences = preferences_1.Preferences;
 function configure(frameworkConfiguration, pluginConfiguration) {
     var container = frameworkConfiguration.container;
-    var eventAggregator = container.get(aurelia_event_aggregator_1.EventAggregator);
-    var router = container.get(aurelia_router_1.Router);
-    var httpClient = container.get(aurelia_http_client_1.HttpClient);
     var storage = container.get(aurelia_storage_1.LocalStorage);
-    var securityContext = new security_context_1.SecurityContext(eventAggregator, httpClient, router, storage);
-    container.registerInstance(security_context_1.SecurityContext, securityContext);
+    var securityContext = container.get(security_context_1.SecurityContext);
     if (pluginConfiguration) {
         pluginConfiguration(securityContext);
     }

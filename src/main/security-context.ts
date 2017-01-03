@@ -3,6 +3,7 @@ import { EventAggregator } from "aurelia-event-aggregator";
 import { HttpClient, HttpResponseMessage } from "aurelia-http-client";
 import { buildQueryString } from "aurelia-path";
 import { Router, NavModel } from "aurelia-router";
+import { TypeBinder } from "type-binder";
 import { AuthorizeRequest } from "./authorize-request";
 import { Credential } from "./credential";
 import { ImplicitCredential } from "./implicit-credential";
@@ -19,7 +20,7 @@ import { HttpHeaders, MediaType } from "aurelia-http-utils";
 import { LocalStorage } from "aurelia-storage";
 import { Tenant } from "./tenant";
 
-@inject(EventAggregator, HttpClient, Router, LocalStorage)
+@inject(EventAggregator, HttpClient, Router, LocalStorage, TypeBinder)
 export class SecurityContext {
 
     public static AUTHENTICATED_EVENT: string = "aurelia.security.authenticated";
@@ -42,12 +43,15 @@ export class SecurityContext {
 
     private storage: LocalStorage;
 
+    private typeBinder: TypeBinder;
+
     private currentTenant: Tenant;
 
-    public constructor(eventAggregator: EventAggregator, api: HttpClient, router: Router, storage: LocalStorage) {
+    public constructor(eventAggregator: EventAggregator, api: HttpClient, router: Router, storage: LocalStorage, typeBinder: TypeBinder) {
         this.eventAggregator = eventAggregator;
         this.router = router;
         this.storage = storage;
+        this.typeBinder = typeBinder;
         this.configuration = new SecurityContextConfiguration();
         this.api = api;
         this.api.configure(http => {
@@ -64,8 +68,8 @@ export class SecurityContext {
         router.navigation.forEach(nav => {
             if (nav.settings.hideToUnauthorized) {
                 nav.settings.hide = Array.isArray(nav.settings.roles)
-                ? !nav.settings.roles.some(r => this.isUserInRole(r))
-                : (nav.settings.requireAuthentication && this.userPrincipal != null)
+                    ? !nav.settings.roles.some(r => this.isUserInRole(r))
+                    : (nav.settings.requireAuthentication && this.userPrincipal != null)
             }
         });
     }
@@ -83,9 +87,9 @@ export class SecurityContext {
         return this.api.get(this.configuration.getPrincipalUrl).then(success => {
             if (remember) {
                 this.requestAccessToken(this.configuration.scope)
-                .then(accessToken => this.storage.set(this.configuration.authorizationTokenStorageKey, accessToken))
+                    .then(accessToken => this.storage.set(this.configuration.authorizationTokenStorageKey, accessToken))
             }
-            this.userPrincipal = <Principal> success.content;
+            this.userPrincipal = <Principal> this.typeBinder.bind(success.content, this.configuration.userPrincipalType);
             this.eventAggregator.publish(SecurityContext.AUTHENTICATED_EVENT, this);
             this.refreshRouteVisibility(this.router);
             return this.userPrincipal;
@@ -113,39 +117,37 @@ export class SecurityContext {
 
     public requestAccessToken(...scopes: string[]): Promise<string> {
         return this.api.createRequest(this.configuration.accessRequestUrl).asGet()
-        .withParams({
-            "client_id": this.configuration.clientId,
-            "response_type": "token",
-            "redirect_uri": "test",
-            "scope": scopes.join(",")
-        }).send().then(success => success.content);
+            .withParams({
+                "client_id": this.configuration.clientId,
+                "response_type": "token",
+                "redirect_uri": "test",
+                "scope": scopes.join(",")
+            }).send().then(success => success.content);
     }
 
-    public deleteAndRevokeToken(): Promise<any> {
-        this.authenticator = new ImplicitAuthenticator();
-        return this.storage.remove(this.configuration.authorizationTokenStorageKey).then(token => {
-            return this.api.createRequest(this.configuration.accessRevokeUrl).asPost()
-            .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
-            .withContent(buildQueryString({
-                token: token
-            })).send();
-        });
+    public deleteAndRevokeToken(): Promise<Authenticator> {
+        return this.storage.get(this.configuration.authorizationTokenStorageKey).then(token => Promise.all([
+            this.storage.remove(this.configuration.authorizationTokenStorageKey),
+            this.api.createRequest(this.configuration.accessRevokeUrl).asPost()
+                .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
+                .withContent(buildQueryString({ token })).send()
+        ])).then(all => this.authenticator = new ImplicitAuthenticator());
     }
 
     public requestPasswordReset(principal: string): Promise<HttpResponseMessage> {
         return this.api.createRequest(this.configuration.passwordResetUrl).asGet()
-        .withParams({
-            "client_id": this.configuration.clientId,
-            "principal": principal
-        }).send();
+            .withParams({
+                "client_id": this.configuration.clientId,
+                "principal": principal
+            }).send();
     }
 
     public resetPassword(token: string, password: string): Promise<HttpResponseMessage> {
         return this.api.createRequest(this.configuration.passwordResetUrl).asPut()
-        .withHeader(HttpHeaders.AUTHORIZATION, `Bearer ${token}`)
-        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN)
-        .withContent(password)
-        .send();
+            .withHeader(HttpHeaders.AUTHORIZATION, `Bearer ${token}`)
+            .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN)
+            .withContent(password)
+            .send();
     }
 
     public navigateToSignIn(message?: string): boolean {
@@ -210,7 +212,7 @@ export class SecurityContextConfiguration {
 
     public forbiddenRoute: string = "forbidden";
 
-    public getPrincipalUrl: string = "me";
+    public getPrincipalUrl: string = "/me";
 
     public accessRequestUrl: string = "/request";
 
@@ -227,5 +229,7 @@ export class SecurityContextConfiguration {
     public defaultTenantId: string;
 
     public authorizationTokenStorageKey: string = "aurelia.security.authorization.token";
+
+    public userPrincipalType: any;
 
 }

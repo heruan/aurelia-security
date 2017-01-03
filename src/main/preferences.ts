@@ -2,7 +2,7 @@ import { StorageEngine } from "aurelia-storage";
 
 export class Preferences implements StorageEngine {
 
-    public get<T>(key: string): Promise<T> {
+    public get<T>(key: string, type?: new(...args) => T, ...generics: any[]): Promise<T> {
         throw new Error(`${this.constructor.name} must implement ${this.get.name}`);
     }
 

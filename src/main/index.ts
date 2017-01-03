@@ -19,12 +19,8 @@ import { Preferences } from "./preferences";
 
 export function configure(frameworkConfiguration: FrameworkConfiguration, pluginConfiguration: Function) {
     let container: Container = frameworkConfiguration.container;
-    let eventAggregator: EventAggregator = container.get(EventAggregator);
-    let router: Router = container.get(Router);
-    let httpClient: HttpClient = container.get(HttpClient);
     let storage: LocalStorage = container.get(LocalStorage);
-    let securityContext: SecurityContext = new SecurityContext(eventAggregator, httpClient, router, storage);
-    container.registerInstance(SecurityContext, securityContext);
+    let securityContext: SecurityContext = container.get(SecurityContext);
     if (pluginConfiguration) {
         pluginConfiguration(securityContext);
     }

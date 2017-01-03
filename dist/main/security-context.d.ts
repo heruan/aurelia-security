@@ -1,6 +1,7 @@
 import { EventAggregator } from "aurelia-event-aggregator";
 import { HttpClient, HttpResponseMessage } from "aurelia-http-client";
 import { Router } from "aurelia-router";
+import { TypeBinder } from "type-binder";
 import { Credential } from "./credential";
 import { Authenticator } from "./authenticator";
 import { Principal } from "./principal";
@@ -17,14 +18,15 @@ export declare class SecurityContext {
     private authenticator;
     private userPrincipal;
     private storage;
+    private typeBinder;
     private currentTenant;
-    constructor(eventAggregator: EventAggregator, api: HttpClient, router: Router, storage: LocalStorage);
+    constructor(eventAggregator: EventAggregator, api: HttpClient, router: Router, storage: LocalStorage, typeBinder: TypeBinder);
     configure(configuration: Object): void;
     refreshRouteVisibility(router: Router): void;
     authenticate(credential: Credential, remember?: boolean): Promise<Principal>;
     deauthenticate(navigateToSignOutRoute?: boolean): void;
     requestAccessToken(...scopes: string[]): Promise<string>;
-    deleteAndRevokeToken(): Promise<any>;
+    deleteAndRevokeToken(): Promise<Authenticator>;
     requestPasswordReset(principal: string): Promise<HttpResponseMessage>;
     resetPassword(token: string, password: string): Promise<HttpResponseMessage>;
     navigateToSignIn(message?: string): boolean;
@@ -52,4 +54,5 @@ export declare class SecurityContextConfiguration {
     scope: string;
     defaultTenantId: string;
     authorizationTokenStorageKey: string;
+    userPrincipalType: any;
 }

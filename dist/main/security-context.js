@@ -13,6 +13,7 @@ var aurelia_event_aggregator_1 = require("aurelia-event-aggregator");
 var aurelia_http_client_1 = require("aurelia-http-client");
 var aurelia_path_1 = require("aurelia-path");
 var aurelia_router_1 = require("aurelia-router");
+var type_binder_1 = require("type-binder");
 var authorize_request_1 = require("./authorize-request");
 var implicit_credential_1 = require("./implicit-credential");
 var password_credential_1 = require("./password-credential");
@@ -24,11 +25,12 @@ var bearer_authenticator_1 = require("./bearer-authenticator");
 var aurelia_http_utils_1 = require("aurelia-http-utils");
 var aurelia_storage_1 = require("aurelia-storage");
 var SecurityContext = SecurityContext_1 = (function () {
-    function SecurityContext(eventAggregator, api, router, storage) {
+    function SecurityContext(eventAggregator, api, router, storage, typeBinder) {
         var _this = this;
         this.eventAggregator = eventAggregator;
         this.router = router;
         this.storage = storage;
+        this.typeBinder = typeBinder;
         this.configuration = new SecurityContextConfiguration();
         this.api = api;
         this.api.configure(function (http) {
@@ -68,7 +70,7 @@ var SecurityContext = SecurityContext_1 = (function () {
                 _this.requestAccessToken(_this.configuration.scope)
                     .then(function (accessToken) { return _this.storage.set(_this.configuration.authorizationTokenStorageKey, accessToken); });
             }
-            _this.userPrincipal = success.content;
+            _this.userPrincipal = _this.typeBinder.bind(success.content, _this.configuration.userPrincipalType);
             _this.eventAggregator.publish(SecurityContext_1.AUTHENTICATED_EVENT, _this);
             _this.refreshRouteVisibility(_this.router);
             return _this.userPrincipal;
@@ -108,14 +110,12 @@ var SecurityContext = SecurityContext_1 = (function () {
     };
     SecurityContext.prototype.deleteAndRevokeToken = function () {
         var _this = this;
-        this.authenticator = new implicit_authenticator_1.ImplicitAuthenticator();
-        return this.storage.remove(this.configuration.authorizationTokenStorageKey).then(function (token) {
-            return _this.api.createRequest(_this.configuration.accessRevokeUrl).asPost()
+        return this.storage.get(this.configuration.authorizationTokenStorageKey).then(function (token) { return Promise.all([
+            _this.storage.remove(_this.configuration.authorizationTokenStorageKey),
+            _this.api.createRequest(_this.configuration.accessRevokeUrl).asPost()
                 .withHeader(aurelia_http_utils_1.HttpHeaders.CONTENT_TYPE, aurelia_http_utils_1.MediaType.APPLICATION_FORM_URLENCODED)
-                .withContent(aurelia_path_1.buildQueryString({
-                token: token
-            })).send();
-        });
+                .withContent(aurelia_path_1.buildQueryString({ token: token })).send()
+        ]); }).then(function (all) { return _this.authenticator = new implicit_authenticator_1.ImplicitAuthenticator(); });
     };
     SecurityContext.prototype.requestPasswordReset = function (principal) {
         return this.api.createRequest(this.configuration.passwordResetUrl).asGet()
@@ -182,8 +182,8 @@ SecurityContext.AUTHENTICATED_EVENT = "aurelia.security.authenticated";
 SecurityContext.UNAUTHENTICATED_EVENT = "aurelia.security.unauthenticated";
 SecurityContext.TENANT_ID_HEADER = "X-Tenant-ID";
 SecurityContext = SecurityContext_1 = __decorate([
-    aurelia_dependency_injection_1.inject(aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_storage_1.LocalStorage),
-    __metadata("design:paramtypes", [aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_storage_1.LocalStorage])
+    aurelia_dependency_injection_1.inject(aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_storage_1.LocalStorage, type_binder_1.TypeBinder),
+    __metadata("design:paramtypes", [aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_storage_1.LocalStorage, type_binder_1.TypeBinder])
 ], SecurityContext);
 exports.SecurityContext = SecurityContext;
 var SecurityContextConfiguration = (function () {
@@ -192,7 +192,7 @@ var SecurityContextConfiguration = (function () {
         this.signUpRoute = "sign-up";
         this.signOutRoute = "sign-in";
         this.forbiddenRoute = "forbidden";
-        this.getPrincipalUrl = "me";
+        this.getPrincipalUrl = "/me";
         this.accessRequestUrl = "/request";
         this.accessRevokeUrl = "/revoke";
         this.accessTokenUrl = "/token";
