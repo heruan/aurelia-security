@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var aurelia_router_1 = require("aurelia-router");
 var security_context_1 = require("./security-context");

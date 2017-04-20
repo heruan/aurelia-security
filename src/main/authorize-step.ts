@@ -14,7 +14,7 @@ export class AuthorizeStep implements PipelineStep {
         this.router = router;
     }
 
-    run(currentInstruction: NavigationInstruction, next: Function): void {
+    run(currentInstruction: NavigationInstruction, next: Function): Promise<any> {
         for (let instruction of currentInstruction.getAllInstructions()) {
             if (instruction.config.settings.requireAuthentication || instruction.config.settings.hasOwnProperty("roles")) {
                 if (this.securityContext.getUserPrincipal() == null) {

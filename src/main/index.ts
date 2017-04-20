@@ -14,7 +14,6 @@ import { PasswordCredential } from "./password-credential";
 import { ProviderCredential } from "./provider-credential";
 import { TokenCredential } from "./token-credential";
 import { LocalStorage } from "aurelia-storage";
-import { Tenant } from "./tenant";
 import { Preferences } from "./preferences";
 
 export function configure(frameworkConfiguration: FrameworkConfiguration, pluginConfiguration: Function) {
@@ -35,7 +34,6 @@ export {
     SecurityContext,
     AuthorizeRequest,
     AuthorizeStep,
-    Tenant,
     Principal,
     SecurityRole,
     Credential,

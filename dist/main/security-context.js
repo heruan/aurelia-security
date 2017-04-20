@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var aurelia_event_aggregator_1 = require("aurelia-event-aggregator");
 var aurelia_http_client_1 = require("aurelia-http-client");
@@ -61,6 +62,7 @@ var SecurityContext = SecurityContext_1 = (function () {
             this.authenticator = new basic_authenticator_1.BasicAuthenticator(credential);
         }
         else if (credential instanceof provider_credential_1.ProviderCredential) {
+            // TODO
         }
         else if (credential instanceof token_credential_1.TokenCredential) {
             this.authenticator = new bearer_authenticator_1.BearerAuthenticator(credential);
@@ -101,6 +103,7 @@ var SecurityContext = SecurityContext_1 = (function () {
             scopes[_i] = arguments[_i];
         }
         return this.api.createRequest(this.configuration.accessRequestUrl).asGet()
+            .withHeader(aurelia_http_utils_1.HttpHeaders.ACCEPT, aurelia_http_utils_1.MediaType.TEXT_PLAIN)
             .withParams({
             "client_id": this.configuration.clientId,
             "response_type": "token",
@@ -167,20 +170,10 @@ var SecurityContext = SecurityContext_1 = (function () {
     SecurityContext.prototype.isSecure = function () {
         return window.location.protocol.startsWith("https");
     };
-    SecurityContext.prototype.getCurrentTenant = function () {
-        return this.currentTenant ? this.currentTenant : {
-            id: this.configuration.defaultTenantId,
-            name: null
-        };
-    };
-    SecurityContext.prototype.switchTenant = function (tenant) {
-        this.currentTenant = tenant;
-    };
     return SecurityContext;
 }());
 SecurityContext.AUTHENTICATED_EVENT = "aurelia.security.authenticated";
 SecurityContext.UNAUTHENTICATED_EVENT = "aurelia.security.unauthenticated";
-SecurityContext.TENANT_ID_HEADER = "X-Tenant-ID";
 SecurityContext = SecurityContext_1 = __decorate([
     aurelia_dependency_injection_1.inject(aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_storage_1.LocalStorage, type_binder_1.TypeBinder),
     __metadata("design:paramtypes", [aurelia_event_aggregator_1.EventAggregator, aurelia_http_client_1.HttpClient, aurelia_router_1.Router, aurelia_storage_1.LocalStorage, type_binder_1.TypeBinder])

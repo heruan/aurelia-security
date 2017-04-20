@@ -18,7 +18,6 @@ import { Principal } from "./principal";
 import { SecurityRole } from "./security-role";
 import { HttpHeaders, MediaType } from "aurelia-http-utils";
 import { LocalStorage } from "aurelia-storage";
-import { Tenant } from "./tenant";
 
 @inject(EventAggregator, HttpClient, Router, LocalStorage, TypeBinder)
 export class SecurityContext {
@@ -26,8 +25,6 @@ export class SecurityContext {
     public static AUTHENTICATED_EVENT: string = "aurelia.security.authenticated";
 
     public static UNAUTHENTICATED_EVENT: string = "aurelia.security.unauthenticated";
-
-    public static TENANT_ID_HEADER: string = "X-Tenant-ID";
 
     public configuration: SecurityContextConfiguration;
 
@@ -44,8 +41,6 @@ export class SecurityContext {
     private storage: LocalStorage;
 
     private typeBinder: TypeBinder;
-
-    private currentTenant: Tenant;
 
     public constructor(eventAggregator: EventAggregator, api: HttpClient, router: Router, storage: LocalStorage, typeBinder: TypeBinder) {
         this.eventAggregator = eventAggregator;
@@ -117,6 +112,7 @@ export class SecurityContext {
 
     public requestAccessToken(...scopes: string[]): Promise<string> {
         return this.api.createRequest(this.configuration.accessRequestUrl).asGet()
+            .withHeader(HttpHeaders.ACCEPT, MediaType.TEXT_PLAIN)
             .withParams({
                 "client_id": this.configuration.clientId,
                 "response_type": "token",
@@ -189,17 +185,6 @@ export class SecurityContext {
         return window.location.protocol.startsWith("https");
     }
 
-    public getCurrentTenant(): Tenant {
-        return this.currentTenant ? this.currentTenant : {
-            id: this.configuration.defaultTenantId,
-            name: null
-        };
-    }
-
-    public switchTenant(tenant: Tenant) {
-        this.currentTenant = tenant;
-    }
-
 }
 
 export class SecurityContextConfiguration {
@@ -225,8 +210,6 @@ export class SecurityContextConfiguration {
     public clientId: string;
 
     public scope: string;
-
-    public defaultTenantId: string;
 
     public authorizationTokenStorageKey: string = "aurelia.security.authorization.token";
 

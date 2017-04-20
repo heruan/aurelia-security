@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var PasswordCredential = (function () {
     function PasswordCredential(identity, password) {
         this.identity = identity;

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var security_context_1 = require("./security-context");
 exports.SecurityContext = security_context_1.SecurityContext;
 var authorize_request_1 = require("./authorize-request");

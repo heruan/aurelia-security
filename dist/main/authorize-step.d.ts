@@ -4,5 +4,5 @@ export declare class AuthorizeStep implements PipelineStep {
     private securityContext;
     private router;
     constructor(securityContext: SecurityContext, router: Router);
-    run(currentInstruction: NavigationInstruction, next: Function): void;
+    run(currentInstruction: NavigationInstruction, next: Function): Promise<any>;
 }

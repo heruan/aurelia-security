@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var OAuth2 = (function () {
     function OAuth2(name, title, applicationId, configuration) {
         this.name = name;

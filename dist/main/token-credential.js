@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var TokenCredential = (function () {
     function TokenCredential(token) {
         this.token = token;

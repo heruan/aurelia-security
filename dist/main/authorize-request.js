@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var aurelia_http_utils_1 = require("aurelia-http-utils");
 var security_context_1 = require("./security-context");
@@ -16,10 +17,6 @@ var AuthorizeRequest = (function () {
         this.securityContext = securityContext;
     }
     AuthorizeRequest.prototype.request = function (message) {
-        var tenant = this.securityContext.getCurrentTenant();
-        if (tenant) {
-            message.headers.add(security_context_1.SecurityContext.TENANT_ID_HEADER, tenant.id);
-        }
         if (!message.headers.has(aurelia_http_utils_1.HttpHeaders.AUTHORIZATION)) {
             return this.securityContext.getAuthenticator().authorizeMessage(message);
         }

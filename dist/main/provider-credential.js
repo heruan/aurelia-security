@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var ProviderCredential = (function () {
     function ProviderCredential(provider, code) {
         this.provider = provider;

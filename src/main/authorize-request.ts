@@ -13,10 +13,6 @@ export class AuthorizeRequest implements Interceptor {
     }
 
     public request(message: HttpRequestMessage): HttpRequestMessage {
-        let tenant = this.securityContext.getCurrentTenant();
-        if (tenant) {
-            message.headers.add(SecurityContext.TENANT_ID_HEADER, tenant.id);
-        }
         if (!message.headers.has(HttpHeaders.AUTHORIZATION)) {
             return this.securityContext.getAuthenticator().authorizeMessage(message);
         }

@@ -6,11 +6,9 @@ import { Credential } from "./credential";
 import { Authenticator } from "./authenticator";
 import { Principal } from "./principal";
 import { LocalStorage } from "aurelia-storage";
-import { Tenant } from "./tenant";
 export declare class SecurityContext {
     static AUTHENTICATED_EVENT: string;
     static UNAUTHENTICATED_EVENT: string;
-    static TENANT_ID_HEADER: string;
     configuration: SecurityContextConfiguration;
     eventAggregator: EventAggregator;
     private api;
@@ -19,7 +17,6 @@ export declare class SecurityContext {
     private userPrincipal;
     private storage;
     private typeBinder;
-    private currentTenant;
     constructor(eventAggregator: EventAggregator, api: HttpClient, router: Router, storage: LocalStorage, typeBinder: TypeBinder);
     configure(configuration: Object): void;
     refreshRouteVisibility(router: Router): void;
@@ -37,8 +34,6 @@ export declare class SecurityContext {
     getUserPrincipal(): Principal;
     isUserInRole(...roleNames: string[]): boolean;
     isSecure(): boolean;
-    getCurrentTenant(): Tenant;
-    switchTenant(tenant: Tenant): void;
 }
 export declare class SecurityContextConfiguration {
     signInRoute: string;
@@ -52,7 +47,6 @@ export declare class SecurityContextConfiguration {
     passwordResetUrl: string;
     clientId: string;
     scope: string;
-    defaultTenantId: string;
     authorizationTokenStorageKey: string;
     userPrincipalType: any;
 }

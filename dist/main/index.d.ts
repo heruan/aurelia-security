@@ -9,7 +9,6 @@ import { ImplicitCredential } from "./implicit-credential";
 import { PasswordCredential } from "./password-credential";
 import { ProviderCredential } from "./provider-credential";
 import { TokenCredential } from "./token-credential";
-import { Tenant } from "./tenant";
 import { Preferences } from "./preferences";
 export declare function configure(frameworkConfiguration: FrameworkConfiguration, pluginConfiguration: Function): Promise<void | Principal>;
-export { SecurityContext, AuthorizeRequest, AuthorizeStep, Tenant, Principal, SecurityRole, Credential, ImplicitCredential, PasswordCredential, ProviderCredential, TokenCredential, Preferences };
+export { SecurityContext, AuthorizeRequest, AuthorizeStep, Principal, SecurityRole, Credential, ImplicitCredential, PasswordCredential, ProviderCredential, TokenCredential, Preferences };
